@@ -70,10 +70,8 @@ jobs:
       #     path: "merged.out"
       - run: | 
           cat merged.out
-          ls
           go install github.com/jandelgado/gcov2lcov@latest && GOROOT=$(go env GOROOT)  ~/go/bin/gcov2lcov -infile=merged.out -outfile=merged.lcov
           cat merged.lcov
-          ls coverage
       - uses: romeovs/lcov-reporter-action@v0.3.1
         with:
           lcov-file: merged.lcov
