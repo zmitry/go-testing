@@ -17,7 +17,7 @@ permissions:
   id-token: write
   issues: read
   packages: read
-  pull-requests: read
+  pull-requests: write
 
 jobs:
   # test:
@@ -41,6 +41,7 @@ jobs:
   #         name: "coverage-unit"
   #         path: "cover.out"
   coverage:
+    permissions: write-all
     name: Coverage
     # needs: test
     runs-on: ubuntu-latest
