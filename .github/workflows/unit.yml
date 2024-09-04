@@ -68,10 +68,11 @@ jobs:
           path: "merged.out"
       - run: | 
           go install github.com/jandelgado/gcov2lcov@latest &&  ~/go/bin/gcov2lcov -infile=merged.out -outfile=merged.lcov
-          ls
+          ls && cat merged.lcov
       - uses: romeovs/lcov-reporter-action@v0.3.1
         with:
-          lcov-file: ./merged.lcov
+          working-directory: .
+          lcov-file: merged.lcov
           delete-old-comments: true
           filter-changed-files: true
 
