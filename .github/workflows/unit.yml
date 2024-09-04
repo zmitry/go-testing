@@ -45,6 +45,8 @@ jobs:
     needs: test
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
       - name: Download artifacts
         uses: actions/download-artifact@v4
         with:
@@ -74,6 +76,6 @@ jobs:
       - uses: romeovs/lcov-reporter-action@v0.3.1
         with:
           lcov-file: merged.lcov
-          delete-old-comments: false
-          filter-changed-files: false
+          delete-old-comments: true
+          filter-changed-files: true
 

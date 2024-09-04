@@ -1,3 +1,3 @@
-module mymodule
+module mypkg
 
 go 1.22.1
