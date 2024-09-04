@@ -67,8 +67,7 @@ jobs:
           name: "code-coverage"
           path: "merged.out"
       - run: | 
-          go install github.com/jandelgado/gcov2lcov@latest
-          ~/go/bin/gcov2lcov -infile=merged.out -outfile=merged.lcov
+          go install github.com/jandelgado/gcov2lcov@latest &&  ~/go/bin/gcov2lcov -infile=merged.out -outfile=merged.lcov
       - uses: romeovs/lcov-reporter-action@v0.3.1
         with:
           lcov-file: merged.lcov
