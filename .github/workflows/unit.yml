@@ -71,5 +71,7 @@ jobs:
           ls
       - uses: romeovs/lcov-reporter-action@v0.3.1
         with:
-          lcov-file: merged.lcov
+          lcov-file: ./merged.lcov
+          delete-old-comments: true
+          filter-changed-files: true
 
