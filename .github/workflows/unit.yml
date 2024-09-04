@@ -31,15 +31,17 @@ jobs:
         with:
           go-version: "1.21.8"
       - name: Test
+        working-directory: backend
         # only run 1 package at a time for integration tests to allow reusing testcontainers
         run: go test -v -covermode=atomic -coverprofile=cover.out   ./...
       - name: Generate coverage report
+        working-directory: backend
         run: go tool cover -html=cover.out -o cover.html
       - name: "Archive code coverage results"
         uses: "actions/upload-artifact@v4"
         with:
           name: "coverage-unit"
-          path: "cover.out"
+          path: "backend/cover.out"
   coverage:
     name: Coverage
     needs: test
