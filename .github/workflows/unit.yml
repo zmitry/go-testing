@@ -95,20 +95,20 @@ jobs:
             cat merged.out
             # cat merged2.out
             go install github.com/jandelgado/gcov2lcov@latest
-            GOROOT=$(go env GOROOT)  ~/go/bin/gcov2lcov -infile=merged.out -outfile=merged.lcov
+            GOROOT=$(go env GOROOT)  ~/go/bin/gcov2lcov -infile=merged.out -outfile=lcov.info
             go tool cover -html=merged.out -o cover.html
         working-directory: backend
       - uses: romeovs/lcov-reporter-action@v0.3.1
         with:
           title: Backend code coverage
-          lcov-file: backend/merged.lcov
+          lcov-file: backend/lcov.info
           delete-old-comments: true
           filter-changed-files: true
       - name: "Archive code coverage results"
         uses: "actions/upload-artifact@v4"
         with:
           name: "merged-coverage"
-          path: "backend/merged.lcov"
+          path: "backend/lcov.info"
       - name: "Archive code coverage results html"
         uses: "actions/upload-artifact@v4"
         with:
