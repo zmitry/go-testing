@@ -83,10 +83,12 @@ jobs:
         run: |
           coverage=$(ls coverage)
           ls coverage
+          go install github.com/shabbyrobe/gocovmerge/cmd/gocovmerge@latest                  
           echo "mode: atomic" > merged.out
           for c in $coverage; do
             cat "coverage/$c/cover.out"
-            tail -q -n +2 coverage/$c/cover.out >> merged.out
+            ~/go/bin/gocovmerge merged.out coverage/$c/cover.out > tmp.out
+            cat tmp.out > merged.out
           done
       - name: convert to lcov
         run: |
