@@ -56,9 +56,7 @@ jobs:
         working-directory: backend
         # only run 1 package at a time for integration tests to allow reusing testcontainers
         run: go test -v -covermode=atomic -coverprofile=cover.out   ./...
-      - name: Generate coverage report
-        working-directory: backend
-        run: go tool cover -html=cover.out -o cover.html
+
       - name: "Archive code coverage results"
         uses: "actions/upload-artifact@v4"
         with:
@@ -96,7 +94,7 @@ jobs:
             # cat merged2.out
             go install github.com/jandelgado/gcov2lcov@latest
             GOROOT=$(go env GOROOT)  ~/go/bin/gcov2lcov -infile=merged.out -outfile=merged.lcov
-            cat merged.lcov
+            go tool cover -html=cover.out -o cover.html
         working-directory: backend
       - uses: romeovs/lcov-reporter-action@v0.3.1
         with:
@@ -109,4 +107,8 @@ jobs:
         with:
           name: "merged-coverage"
           path: "backend/merged.lcov"
-
+      - name: "Archive code coverage results html"
+        uses: "actions/upload-artifact@v4"
+        with:
+          name: "merged-coverage"
+          path: "backend/cover.html"
