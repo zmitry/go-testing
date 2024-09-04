@@ -71,5 +71,5 @@ jobs:
           ~/go/bin/gcov2lcov -infile=merged.out -outfile=merged.lcov
       - uses: romeovs/lcov-reporter-action@v0.3.1
         with:
-          lcov-file: merged.info
+          lcov-file: merged.lcov
 
