@@ -114,3 +114,9 @@ jobs:
         with:
           name: "merged-coverage-html"
           path: "backend/cover.html"
+
+      - name: "Archive code coverage results gcov"
+        uses: "actions/upload-artifact@v4"
+        with:
+          name: "merged-coverage-html"
+          path: "backend/merged.out"
