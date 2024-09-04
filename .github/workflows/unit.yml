@@ -68,15 +68,16 @@ jobs:
         with:
           name: "code-coverage"
           path: "merged.out"
-      - run: | 
+      - run: |
           cat merged.out
           # cat merged2.out
           go install github.com/jandelgado/gcov2lcov@latest
           GOROOT=$(go env GOROOT)  ~/go/bin/gcov2lcov -infile=merged.out -outfile=merged.lcov
           cat merged.lcov
+        working-directory: backend
       - uses: romeovs/lcov-reporter-action@v0.3.1
         with:
-          lcov-file: merged.lcov
+          lcov-file: backend/merged.lcov
           delete-old-comments: true
           filter-changed-files: true
 
