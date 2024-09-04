@@ -20,11 +20,8 @@ permissions:
   pull-requests: read
 
 jobs:
-  changes:
-    uses: ./.github/workflows/code-changes.yml
   test:
     name: Run tests
-    needs: changes
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
