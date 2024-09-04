@@ -64,7 +64,7 @@ jobs:
           path: "backend/cover.out"
   coverage:
     name: Coverage
-    needs: test
+    needs: [test, test2]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -96,7 +96,7 @@ jobs:
             # cat merged2.out
             go install github.com/jandelgado/gcov2lcov@latest
             GOROOT=$(go env GOROOT)  ~/go/bin/gcov2lcov -infile=merged.out -outfile=merged.lcov
-            go tool cover -html=cover.out -o cover.html
+            go tool cover -html=merged.out -o cover.html
         working-directory: backend
       - uses: romeovs/lcov-reporter-action@v0.3.1
         with:
