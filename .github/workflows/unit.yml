@@ -83,5 +83,5 @@ jobs:
         uses: "actions/upload-artifact@v4"
         with:
           name: "merged-coverage"
-          path: "merged.lcov"
+          path: "backend/merged.lcov"
 
