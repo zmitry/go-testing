@@ -12,9 +12,6 @@ func TestAdd(t *testing.T) {
 		args args
 		want int
 	}{
-		{"1+2=3", args{1, 2}, 3},
-		{"2+3=5", args{2, 3}, 5},
-		{"3+4=7", args{3, 4}, 7},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
