@@ -84,9 +84,11 @@ jobs:
         working-directory: backend
         run: |
           coverage=$(ls coverage)
+          ls coverage
           echo "mode: atomic" > merged.out
           for c in $coverage; do
-            tail -q -n +2 coverage/$coverage/cover.out >> merged.out
+            cat "coverage/$c/cover.out"
+            tail -q -n +2 coverage/$c/cover.out >> merged.out
           done
       - name: convert to lcov
         run: |
