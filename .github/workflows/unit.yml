@@ -99,12 +99,12 @@ jobs:
             GOROOT=$(go env GOROOT)  ~/go/bin/gcov2lcov -infile=merged.out -outfile=lcov.info
             go tool cover -html=merged.out -o cover.html
         working-directory: backend
-      - uses: romeovs/lcov-reporter-action@v0.3.1
+      - uses: kefasjw/lcov-pull-request-report@v1
         with:
           title: Backend code coverage
           lcov-file: backend/lcov.info
-          delete-old-comments: true
-          filter-changed-files: true
+          changed-files-minimum-coverage: 50
+          artifact-name: "pr-coverage-html-report"
       - name: "Archive code coverage results"
         uses: "actions/upload-artifact@v4"
         with:
