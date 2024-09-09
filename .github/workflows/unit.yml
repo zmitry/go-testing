@@ -103,6 +103,7 @@ jobs:
           lcov-file: backend/lcov.info
           changed-files-minimum-coverage: 50
           artifact-name: "pr-coverage-html-report"
+          github-token: ${{ secrets.GITHUB_TOKEN }}
       - name: "Archive code coverage results"
         uses: "actions/upload-artifact@v4"
         with:
