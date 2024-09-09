@@ -121,7 +121,7 @@ jobs:
           name: "merged-coverage-gcov"
           path: "backend/merged.out"
       - uses: fgrosse/go-coverage-report@v1.1.1 # Consider using a Git revision for maximum security
-        if: github.event_name == 'pull_request'
+        if: github.event_name == 'pull_request' && !contains(github.event.pull_request.labels.*.name, 'skip_coverage_check')
         with:
           coverage-artifact-name: "merged-coverage-gcov" # can be omitted if you used this default value
           coverage-file-name: "merged.out" # can be omitted if you used this default value
