@@ -100,7 +100,6 @@ jobs:
         working-directory: backend
       - uses: kefasjw/lcov-pull-request-report@v1
         with:
-          title: Backend code coverage
           lcov-file: backend/lcov.info
           changed-files-minimum-coverage: 50
           artifact-name: "pr-coverage-html-report"
