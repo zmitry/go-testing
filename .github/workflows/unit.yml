@@ -123,11 +123,10 @@ jobs:
       - uses: fgrosse/go-coverage-report@v1.1.1 # Consider using a Git revision for maximum security
         if: github.event_name == 'pull_request' && !contains(github.event.pull_request.labels.*.name, '')
         with:
-          coverage-artifact-name: "merged-coverage-gcov" # can be omitted if you used this default value
           coverage-file-name: "merged.out" # can be omitted if you used this default value
       - name: Install goveralls
         run: go install github.com/mattn/goveralls@latest
       - name: Send coverage
         env:
-          COVERALLS_TOKEN: zganwyVXFWW8GgoH9tZeb1RYzJHP8dmlQ
+          COVERALLS_TOKEN: ${{ secrets.COVERALLS_TOKEN }}
         run: goveralls -coverprofile=merged.out -service=github
