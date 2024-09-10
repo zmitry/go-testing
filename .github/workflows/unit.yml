@@ -55,7 +55,7 @@ jobs:
       - name: Test
         working-directory: backend
         # only run 1 package at a time for integration tests to allow reusing testcontainers
-        run: go test -v -covermode=atomic -coverprofile=cover.out   ./...
+        run: go test -v --coverpkg=./a/...,./b/... -covermode=atomic -coverprofile=cover.out   ./...
 
       - name: "Archive code coverage results"
         uses: "actions/upload-artifact@v4"
@@ -121,7 +121,7 @@ jobs:
           name: "merged-coverage-gcov"
           path: "backend/merged.out"
       - uses: fgrosse/go-coverage-report@v1.1.1 # Consider using a Git revision for maximum security
-        if: github.event_name == 'pull_request' && !contains(github.event.pull_request.labels.*.name, 'skip_coverage_check')
+        if: github.event_name == 'pull_request' && !contains(github.event.pull_request.labels.*.name, '')
         with:
           coverage-artifact-name: "merged-coverage-gcov" # can be omitted if you used this default value
           coverage-file-name: "merged.out" # can be omitted if you used this default value
