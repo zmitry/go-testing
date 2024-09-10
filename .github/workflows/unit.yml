@@ -127,6 +127,7 @@ jobs:
       - name: Install goveralls
         run: go install github.com/mattn/goveralls@latest
       - name: Send coverage
+        working-directory: backend
         env:
           COVERALLS_TOKEN: ${{ secrets.COVERALLS_TOKEN }}
-        run: ~/go/bin/goveralls -coverprofile=backend/merged.out -service=github
+        run: ~/go/bin/goveralls -coverprofile=merged.out -service=github
