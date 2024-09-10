@@ -125,3 +125,9 @@ jobs:
         with:
           coverage-artifact-name: "merged-coverage-gcov" # can be omitted if you used this default value
           coverage-file-name: "merged.out" # can be omitted if you used this default value
+      - name: Install goveralls
+        run: go install github.com/mattn/goveralls@latest
+      - name: Send coverage
+        env:
+          COVERALLS_TOKEN: zganwyVXFWW8GgoH9tZeb1RYzJHP8dmlQ
+        run: goveralls -coverprofile=merged.out -service=github
