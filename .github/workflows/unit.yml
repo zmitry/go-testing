@@ -129,4 +129,4 @@ jobs:
       - name: Send coverage
         env:
           COVERALLS_TOKEN: ${{ secrets.COVERALLS_TOKEN }}
-        run: goveralls -coverprofile=merged.out -service=github
+        run: ~/go/bin/goveralls -coverprofile=merged.out -service=github
