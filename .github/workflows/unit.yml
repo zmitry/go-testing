@@ -4,6 +4,9 @@
 # NOTE: if you need to add images or charts to build, see artifacts.yaml
 name: Go unit test for backend
 on:
+  push:
+    branches:
+    - main
   pull_request:
   merge_group:
     types: [checks_requested]
