@@ -98,12 +98,12 @@ jobs:
             GOROOT=$(go env GOROOT)  ~/go/bin/gcov2lcov -infile=merged.out -outfile=lcov.info
             go tool cover -html=merged.out -o cover.html
         working-directory: backend
-      - uses: kefasjw/lcov-pull-request-report@v1
-        with:
-          lcov-file: backend/lcov.info
-          changed-files-minimum-coverage: 50
-          artifact-name: "pr-coverage-html-report"
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+      # - uses: kefasjw/lcov-pull-request-report@v1
+      #   with:
+      #     lcov-file: backend/lcov.info
+      #     changed-files-minimum-coverage: 50
+      #     artifact-name: "pr-coverage-html-report"
+      #     github-token: ${{ secrets.GITHUB_TOKEN }}
       - name: "Archive code coverage results"
         uses: "actions/upload-artifact@v4"
         with:
@@ -120,8 +120,14 @@ jobs:
         with:
           name: "merged-coverage-gcov"
           path: "backend/merged.out"
-      - uses: fgrosse/go-coverage-report@v1.1.1 # Consider using a Git revision for maximum security
-        if: github.event_name == 'pull_request' && !contains(github.event.pull_request.labels.*.name, '')
-        with:
-          coverage-artifact-name: "merged-coverage-gcov" # can be omitted if you used this default value
-          coverage-file-name: "merged.out" # can be omitted if you used this default value
+      # - uses: fgrosse/go-coverage-report@v1.1.1 # Consider using a Git revision for maximum security
+      #   if: github.event_name == 'pull_request' && !contains(github.event.pull_request.labels.*.name, '')
+      #   with:
+      #     coverage-file-name: "merged.out" # can be omitted if you used this default value
+      - name: Install goveralls
+        run: go install github.com/mattn/goveralls@latest
+      - name: Send coverage
+        working-directory: backend
+        env:
+          COVERALLS_TOKEN: ${{ secrets.COVERALLS_TOKEN }}
+        run: ~/go/bin/goveralls -coverprofile=merged.out -service=github
