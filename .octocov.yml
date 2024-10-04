@@ -1,6 +1,8 @@
 coverage:
   if: true
   acceptable: current >= 40%
+  paths:
+    - backend/lcov.info
 codeToTestRatio:
   code:
     - '**/*.go'
