@@ -117,20 +117,9 @@ jobs:
         with:
           name: "merged-coverage-html"
           path: "backend/cover.html"
-
+      - uses: k1LoW/octocov-action@v1
       - name: "Archive code coverage results gcov"
         uses: "actions/upload-artifact@v4"
         with:
           name: "merged-coverage-gcov"
           path: "backend/merged.out"
-      # - uses: fgrosse/go-coverage-report@v1.1.1 # Consider using a Git revision for maximum security
-      #   if: github.event_name == 'pull_request' && !contains(github.event.pull_request.labels.*.name, '')
-      #   with:
-      #     coverage-file-name: "merged.out" # can be omitted if you used this default value
-      - name: Install goveralls
-        run: go install github.com/mattn/goveralls@latest
-      - name: Send coverage
-        working-directory: backend
-        env:
-          COVERALLS_TOKEN: ${{ secrets.COVERALLS_TOKEN }}
-        run: ~/go/bin/goveralls -coverprofile=merged.out -service=github
